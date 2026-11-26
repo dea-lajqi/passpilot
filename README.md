@@ -34,6 +34,3 @@ The strength checker is a learning tool, not a professional password audit. It c
 
 The generator uses `crypto.getRandomValues` and unbiased random selection. Passwords are made in your browser; the site has no backend.
 
-## Development
-
-Built as a small front-end practice project with assistance from ChatGPT. Reviewed and adapted for a clean, minimal design.
