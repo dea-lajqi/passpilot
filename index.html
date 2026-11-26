@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7f4">
+  <meta name="description" content="PassPilot: a simple password strength checker and generator that runs in your browser.">
+  <title>PassPilot — Password Checker</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a href="#top" class="brand">passpilot<span class="brand-period">.</span></a>
+      <span class="header-note">A small password tool</span>
+    </header>
+
+    <main id="top">
+      <section class="intro" aria-labelledby="page-title">
+        <span class="eyebrow">PASSWORD BASICS</span>
+        <h1 id="page-title">A better password starts here.</h1>
+        <p>Check how strong a password might be, or make a new one. No account needed, no passwords saved.</p>
+      </section>
+
+      <section class="workbench" aria-label="Password tools">
+        <div class="tab-bar" role="tablist" aria-label="Password tools">
+          <button type="button" id="check-tab" class="tab active" role="tab" aria-selected="true" aria-controls="check-panel">Check a password</button>
+          <button type="button" id="generate-tab" class="tab" role="tab" aria-selected="false" aria-controls="generate-panel" tabindex="-1">Generate one</button>
+        </div>
+
+        <div id="check-panel" class="panel" role="tabpanel" aria-labelledby="check-tab">
+          <div class="panel-heading">
+            <h2>Password strength</h2>
+            <p>This gives you a quick estimate, not a security guarantee.</p>
+          </div>
+
+          <label class="input-label" for="password-input">Your password</label>
+          <div class="password-field">
+            <input id="password-input" type="password" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Enter a sample password" aria-describedby="privacy-note">
+            <button type="button" id="toggle-visibility" class="icon-button" aria-label="Show password" aria-pressed="false" title="Show or hide password">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.3 12s3.4-6 9.7-6 9.7 6 9.7 6-3.4 6-9.7 6-9.7-6-9.7-6Z"/><circle cx="12" cy="12" r="2.8"/></svg>
+            </button>
+          </div>
+
+          <div class="strength-head">
+            <strong id="strength-name" aria-live="polite">Waiting for input</strong>
+            <span id="length-count">0 characters</span>
+          </div>
+          <div class="meter" role="progressbar" aria-label="Password strength" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" id="strength-meter"><span class="segment"></span><span class="segment"></span><span class="segment"></span><span class="segment"></span></div>
+          <p class="strength-description" id="strength-description">Type a password to see an approximate strength estimate.</p>
+
+          <h3 class="section-label">A few things to look for</h3>
+          <div class="rule-list">
+            <div class="rule" id="rule-length"><span class="rule-check" aria-hidden="true">✓</span><span>At least 12 characters</span></div>
+            <div class="rule" id="rule-long"><span class="rule-check" aria-hidden="true">✓</span><span>16 or more characters is even better</span></div>
+            <div class="rule" id="rule-common"><span class="rule-check" aria-hidden="true">✓</span><span>No common words or patterns</span></div>
+            <div class="rule" id="rule-repeat"><span class="rule-check" aria-hidden="true">✓</span><span>No long repeated characters</span></div>
+          </div>
+          <p class="feedback" id="feedback" aria-live="polite">Your password stays on this device. We don't save or transmit it.</p>
+          <p id="privacy-note" class="small-note">Tip: use a made-up example here, not a password you actually use. This tool can't check whether a password has been leaked.</p>
+        </div>
+
+        <div id="generate-panel" class="panel" role="tabpanel" aria-labelledby="generate-tab" hidden>
+          <div class="panel-heading">
+            <h2>Password generator</h2>
+            <p>Choose what you'd like to include, then generate a random password.</p>
+          </div>
+          <div class="generator-top">
+            <label class="input-label" for="password-length">Password length</label>
+            <output id="length-output" for="password-length">20 characters</output>
+          </div>
+          <input type="range" min="12" max="32" value="20" step="1" id="password-length">
+          <div class="range-ends"><span>12</span><span>32</span></div>
+          <fieldset class="options"><legend>Include</legend>
+            <label><input type="checkbox" id="opt-upper" checked> Uppercase letters</label>
+            <label><input type="checkbox" id="opt-lower" checked> Lowercase letters</label>
+            <label><input type="checkbox" id="opt-digits" checked> Numbers</label>
+            <label><input type="checkbox" id="opt-symbols" checked> Symbols</label>
+          </fieldset>
+          <button class="primary-button" type="button" id="generate-button">Generate password</button>
+          <div class="generated-wrap" id="generated-wrap" hidden>
+            <label class="input-label" for="generated-password">Generated password</label>
+            <div class="generated-field"><input id="generated-password" type="text" readonly spellcheck="false" aria-label="Generated password"><button type="button" id="copy-button">Copy</button></div>
+            <p id="copy-status" class="copy-status" role="status">Generated on your device. Store it in a password manager.</p>
+          </div>
+          <p class="small-note">Passwords are generated locally using your browser's secure random number generator. Use a different password for each account.</p>
+        </div>
+      </section>
+
+      <aside class="help-note"><strong>A quick reminder</strong><p>Long and unique passwords matter more than adding random symbols to a short one. A password manager and two-factor authentication help, too.</p></aside>
+    </main>
+
+    <footer class="site-footer"><span>PassPilot © 2026</span><span>A small front-end project · HTML / CSS / JS</span></footer>
+  </div>
+</body>
+</html>
